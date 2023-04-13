@@ -1,3 +1,5 @@
 Name;Surname;UserPrincipalName;AccountPassword;Description;Displayname
 fatih mehmed;bilgin;fatih.bilgin;Password123;deneme1-2;fatih bilgin
 mehmed ;bilgin;mehmed.bilgin;Password123;deneme1-2-3;mehmed bilgin
+
+import-csv .\users.csv | Foreach-Object {New-ADUser -Name $_.Name -Surname $_.Surname -UserPrincipalName $_.Userprincipalname -AccountPassword (ConvertTo-SecureString $_.AccountPassword -AsPlainText -force) -Description $_.Description -DisplayName $_.Displayname -PasswordNeverExpires $True -Enabled $True -Path “OU=test,DC=fatihteke,DC=local”}
